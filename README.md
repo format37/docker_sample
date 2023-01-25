@@ -17,6 +17,19 @@ sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer \
     portainer/portainer-ce:2.9.3
 ```
 ### Project installation:
+* Clone the repository
 ```
-git clone
+# if not exists
+mkdir ~/projects -p && cd ~/projects
+https://github.com/format37/docker_sample.git
+cd docker_sample
+```
+* Compose:
+```
+sh compose.sh
+```
+### Test:
+```
+cd client
+python3 request.py
 ```
