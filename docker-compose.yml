@@ -1,0 +1,51 @@
+version: '3.8'
+services:
+  
+  plus_function:
+    build: plus
+    deploy:
+      mode: replicated
+      replicas: 1
+    volumes:
+      - /home/alex/projects/docker_sample/data:/worker/data
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    restart: always
+    ports:
+      - 42012:42012
+    environment:
+      - TZ=Europe/Moscow
+      - PORT=42012
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+  
+  minus_function:
+    build: minus
+    deploy:
+      mode: replicated
+      replicas: 1
+      #resources:
+        #limits:
+        #  cpus: '0.001'
+        #  memory: 50M
+        #reservations:
+        #  devices:
+        #  - driver: nvidia
+        #    device_ids: ['0']
+        #    capabilities: [gpu]
+    volumes:
+      - /home/alex/projects/docker_sample/data:/worker/data
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    restart: always
+    ports:
+      - 42013:42013
+    environment:
+      - TZ=Europe/Moscow
+      - PORT=42013
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
